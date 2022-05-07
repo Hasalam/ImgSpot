@@ -1,42 +1,62 @@
-.header{
-    background-color: #A18D78;
-    min-width: 100%;
-    height: 90px;
-    display: flex;
-    flex-direction: row;
+.header {
+  background-color: #a18d78;
+  min-width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
 }
 
-.img{
-    position: relative;
-    max-width: 87px;
-    max-height: 82px;
-    margin: 4px;
-    border-radius: 10px;
+.img {
+  position: relative;
+  max-width: 87px;
+  max-height: 82px;
+  margin: 4px;
+  border-radius: 10px;
 }
 
-
-
-.searchbar{
-    position: absolute;
-    width: 54px;
-    height: 54px;
-    top:16px;
-    right: 103px;
-    background: #D6B492;
-    mix-blend-mode: lighten;
-    border-radius: 11px;
+.searchbar {
+  background-image: url(magnifying.jpg);
+  background-position: bottom 50% right 7px;
+  
+  background-repeat: no-repeat;
+  background-size: 45px, 42px;
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  top: 16px;
+  right: 103px;
+  background-color: #d6b492;
+  mix-blend-mode: lighten;
+  border-radius: 11px;
+  transition: 0.3s ease-in;
+  border: 0px;
+  caret-color: transparent;
+  color: transparent;
+  font-size: 42px;
+  font-weight: 700;
+  font-family: "Coming Soon";
+  font-style: normal;
 }
 
-.searchbar:hover{
-    width: 240px;
-    transition: 0.6s ease-in-out;
+.searchbar:hover {
+  transition: 0.3s ease-in;
+  width: 240px;
+  color:black;
+  padding-left: 15px;
+  padding-right: 57px;
+}
+.star {
+  max-width: 45px;
+  max-height: 42px;
+  top: 24px;
+  right: 31px;
+  position: absolute;
 }
 
-
-.magglas{
-    position: absolute;
-    min-width: 45px;
-    top: 8px;
-    right: 6px;
-    min-height: 42px;
+.magglas {
+  top: 24px;
+  right: 109px;
+  position: absolute;
+  max-width: 45px;
+  max-height: 42px;
 }

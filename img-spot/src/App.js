@@ -1,9 +1,13 @@
-import Header from './components/Layout/Header';
-import './App.css';
+import Header from "./components/Layout/Header";
+import Table from "./components/ImgTable";
+import "./App.css";
 
 function App() {
   return (
-   <Header/>
+    <div>
+      <Header />
+      <Table />
+    </div>
   );
 }
 
