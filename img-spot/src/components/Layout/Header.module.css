@@ -24,7 +24,7 @@
   width: 54px;
   height: 54px;
   top: 16px;
-  right: 103px;
+  right: 215px;
   background-color: #d6b492;
   mix-blend-mode: lighten;
   border-radius: 11px;
@@ -44,19 +44,50 @@
   color:black;
   padding-left: 15px;
   padding-right: 57px;
+  border: 2px;
 }
 .star {
   max-width: 45px;
   max-height: 42px;
   top: 24px;
-  right: 31px;
+  right: 85px;
+  border-radius: 9px;
   position: absolute;
 }
-
+.star:hover{
+  border: 1px;
+  border-style: solid;
+  border-color: #544A40;
+}
 .magglas {
+  
   top: 24px;
-  right: 109px;
+  right: 200px;
   position: absolute;
   max-width: 45px;
   max-height: 42px;
+}
+
+.add{
+  border-radius: 9px;
+  position: absolute;
+  max-width: 45px;
+  max-height: 42px;
+  top: 24px;
+  right: 150px;
+}
+
+.avatar{
+  border-radius: 9px;
+  position: absolute;
+  max-width: 45px;
+  max-height: 42px;
+  top: 24px;
+  right: 31px;
+}
+
+.add:hover{
+  border-color: #544A40;
+  border: 1px;
+  border-style: solid;
 }
