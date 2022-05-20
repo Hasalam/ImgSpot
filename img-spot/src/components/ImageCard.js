@@ -1,30 +1,59 @@
 import classes from "./ImageCard.module.css";
 import AddToFavourite from "./AddToFavourite.png";
 import Cross from "./Layout/Cross.png";
-
+import Pencil from "./Layout/Pencil.png";
+import { useRef, useState } from "react";
 function ImageCard(props) {
-  function deleteImage(){
-    const formData={
-      url:props.Image
+  function editTags() {
+    if (!redacting) {
+      enableRedacting(true);
+    } else {
+      const formData={
+        url:props.Image,
+        tags:Tags.current.value
+      }
+      const otherParameters = {
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(formData),
+        method: "PUT",
+      };
+      fetch("https://localhost:44362/Image/EditTags", otherParameters)
+      .then((data) => {
+        if (!data.ok) {
+          alert("Image is non-existent!");
+          return Promise.reject();
+        }
+        alert("Image edited!");
+        return data.json();
+      })
+      .then((res) => {})
+      .catch();
+      enableRedacting(false);
     }
+  }
+  const [redacting, enableRedacting] = useState(false);
+  const Tags = useRef();
+  function deleteImage() {
+    const formData = {
+      url: props.Image,
+    };
     const otherParameters = {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData),
       method: "DELETE",
     };
     fetch("https://localhost:44362/Image/DeleteImage", otherParameters)
-    .then((data) => {
-      if (!data.ok) {
-        alert("Image is already deleted");
-        return Promise.reject();
-      }
-      alert("Image deleted!");
-      return data.json();
-    })
-    .then((res) => {})
-    .catch();
+      .then((data) => {
+        if (!data.ok) {
+          alert("Image is already deleted");
+          return Promise.reject();
+        }
+        alert("Image deleted!");
+        return data.json();
+      })
+      .then((res) => {})
+      .catch();
   }
-
 
   function addToFavourite() {
     const login = props.Login;
@@ -72,8 +101,22 @@ function ImageCard(props) {
   return (
     <div className={classes.imageCard}>
       <img className={classes.image} src={props.Image}></img>
-      <div className={classes.textArea}>{props.ImageTags}</div>
+      {redacting ? (
+        <input className={classes.editingArea} defaultValue={props.ImageTags} ref={Tags}></input>
+      ) : (
+        <div className={classes.textArea}>{props.ImageTags}</div>
+      )}
+
       <div className={classes.Buttons}>
+        {props.admin ? (
+          <img
+            src={Pencil}
+            className={classes.DeleteButton}
+            onClick={editTags}
+          ></img>
+        ) : (
+          <></>
+        )}
         {props.Login != undefined ? (
           <img
             src={AddToFavourite}
@@ -84,7 +127,11 @@ function ImageCard(props) {
           <></>
         )}
         {props.admin ? (
-          <img src={Cross} className={classes.DeleteButton} onClick={deleteImage}></img>
+          <img
+            src={Cross}
+            className={classes.DeleteButton}
+            onClick={deleteImage}
+          ></img>
         ) : (
           <></>
         )}
