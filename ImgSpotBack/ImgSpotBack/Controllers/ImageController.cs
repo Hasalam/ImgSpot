@@ -80,10 +80,31 @@ namespace ImgSpotBack.Controllers
             return BadRequest();
         }
 
+        [HttpPut("EditTags")]
+        public ActionResult EditTags(EditImage Image) {
+            if (Image == null)
+            {
+                return BadRequest();
+            }
+            Image img = _db.Image.Where(x => x.Url == Image.Url).FirstOrDefault();
+            if (img == null)
+            {
+                return BadRequest();
+            }
+            img.Tags=Image.Tags;
+            _db.Update(img);
+            _db.SaveChanges();
+            return Ok();
+        }
+
         [HttpDelete("DeleteImage")]
 
         public ActionResult DeleteImage(ImageDelete image)
         {
+            if (image == null)
+            {
+                return BadRequest();
+            }
             Image dbimage = _db.Image.Where(x => x.Url == image.Url).First();
             if (dbimage != null)
             {
