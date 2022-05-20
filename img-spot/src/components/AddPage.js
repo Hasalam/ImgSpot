@@ -8,15 +8,30 @@ function AddPage() {
   const imageTagsRef = useRef();
 
   function CheckImage() {
-    
     setImage(imageUrlRef.current.value);
     setText(imageTagsRef.current.value);
   }
 
-  function submitImage(event)
-  {
+  function submitImage(event) {
     event.preventDefault();
-    alert("Submit");
+    const formdata = {
+      id: 0,
+      url: imageUrlRef.current.value,
+      tags: imageTagsRef.current.value
+    };
+    const otherParameters = {
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(formdata),
+      method: "POST",
+    };
+
+    fetch("https://localhost:44362/Image/AddImage", otherParameters)
+      .then((data) => {
+        return data.json();
+      })
+      .then((res) => {
+        console.log(res);
+      });
   }
   return (
     <div className={classes.addPage}>
@@ -27,14 +42,18 @@ function AddPage() {
           name="ImageUrl"
           ref={imageUrlRef}
           className={classes.imageLabel}
+          required
         ></input>
         <label htmlFor="ImageTags">Tags</label>
         <input
           name="ImageTags"
           ref={imageTagsRef}
           className={classes.imageLabel}
+          required
         ></input>
-        <button type="button" onClick={CheckImage}>Check</button>
+        <button type="button" onClick={CheckImage}>
+          Check
+        </button>
         <button>Submit</button>
       </form>
       <div className={classes.imageCard}>

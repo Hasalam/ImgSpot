@@ -2,7 +2,7 @@ import Table from "./ImgTable";
 import Card from "./ImageCard";
 import classes from "../body.module.css";
 import { useState } from "react";
-function HomePage() {
+function HomePage(props) {
   const [image, setImageSrc] = useState("");
   const [text, setText] = useState("");
   
@@ -12,9 +12,9 @@ function HomePage() {
       <Table
         changePicture={setImageSrc}
         changeText={setText}
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAe0Yu14w9mSulO7Bo3KC0sU1lxG3H17DwCuMqWVjBns1wqdf6SJ7ALKhcZkHsEDRHvpI&usqp=CAU"
+        src={props.images}
       />
-      <Card Image={image} ImageTags={text} />
+      <Card Image={image} Login={props.Login} ImageTags={text} favourites={props.favourites} admin={props.admin}/>
     </div>
   );
 }
