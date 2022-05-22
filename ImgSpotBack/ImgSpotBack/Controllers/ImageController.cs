@@ -105,13 +105,21 @@ namespace ImgSpotBack.Controllers
             {
                 return BadRequest();
             }
-            Image dbimage = _db.Image.Where(x => x.Url == image.Url).First();
-            if (dbimage != null)
+            try
             {
-                _db.Image.Remove(dbimage);
-                _db.SaveChanges();
-                return Ok();
+                Image dbimage = _db.Image.Where(x => x.Url == image.Url).First();
+                if (dbimage != null)
+                {
+                    _db.Image.Remove(dbimage);
+                    _db.SaveChanges();
+                    return Ok();
+                }
             }
+            catch { 
+                return BadRequest();
+            }
+            
+           
             return BadRequest();
         }
 
